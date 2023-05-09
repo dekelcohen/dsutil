@@ -1,6 +1,7 @@
 import argparse
 import json
 import os
+from pathlib import Path
 import shutil
 from collections import defaultdict
 from inspect import signature
@@ -9,6 +10,7 @@ from typing import Dict, List, Optional, Set
 
 import torch
 
+from huggingface_hub import snapshot_download
 from huggingface_hub import CommitInfo, CommitOperationAdd, Discussion, HfApi, hf_hub_download
 from huggingface_hub.file_download import repo_folder_name
 from safetensors.torch import load_file, save_file
@@ -234,4 +236,8 @@ if __name__ == "__main__":
     api = HfApi()
     convert(api, model_id, force=args.force)
     """
-    convert_file(r'D:\NLP\NER\Persian\parsbert\models\NER\bert-base-NER\pytorch_model.bin', r"D:\NLP\NER\Persian\parsbert\models\NER\bert-base-NER\model.safetensors")
+    local_path = snapshot_download(repo_id="HeNLP/HeRo", ignore_patterns=[])    
+    
+    path_bin  = r"D:\NLP\NER\heb\abg_ner_iahlt_train_eval_f1_0_88_7\pytorch_model.bin"
+    path_safetensors = Path(path_bin).parent / 'model.safetensors'
+    convert_file(path_bin, path_safetensors)
