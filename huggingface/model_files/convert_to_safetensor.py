@@ -236,8 +236,16 @@ if __name__ == "__main__":
     api = HfApi()
     convert(api, model_id, force=args.force)
     """
-    local_path = snapshot_download(repo_id="HeNLP/HeRo", ignore_patterns=[])    
+    USE_SAME_FILENAME = True
+    DOWNLOAD_MODEL_FILES = False
+    if DOWNLOAD_MODEL_FILES:
+        local_path = snapshot_download(repo_id="HeNLP/LongHeRo", ignore_patterns=[])    
     
-    path_bin  = r"D:\NLP\NER\heb\abg_ner_iahlt_train_eval_f1_0_88_7\pytorch_model.bin"
-    path_safetensors = Path(path_bin).parent / 'model.safetensors'
+    path_bin  = r"D:\NLP\SentenceTransformers\MultiLingual\stsb-xlm-r-multilingual\pytorch_model.bin"
+    
+    if USE_SAME_FILENAME:
+        base_filename = Path(path_bin).stem 
+    else:
+        base_filename = 'model'
+    path_safetensors = Path(path_bin).parent / (base_filename + '.safetensors')
     convert_file(path_bin, path_safetensors)
