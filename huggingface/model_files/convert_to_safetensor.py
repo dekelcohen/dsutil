@@ -239,7 +239,7 @@ if __name__ == "__main__":
     USE_SAME_FILENAME = True
     DOWNLOAD_MODEL_FILES = False
     if DOWNLOAD_MODEL_FILES:
-        local_path = snapshot_download(repo_id="HeNLP/LongHeRo", ignore_patterns=[])    
+        local_path = snapshot_download(repo_id="Qwen/Qwen-14B-Chat-Int4", local_dir=r"D:\Halb\Oct_26\Qwen-14B-Chat-Int4_snapshot", ignore_patterns=[])
     
     path_bin  = r"D:\NLP\SentenceTransformers\MultiLingual\stsb-xlm-r-multilingual\pytorch_model.bin"
     
